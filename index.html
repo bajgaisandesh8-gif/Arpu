@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Arpita Baby</title>
+  <meta name="description" content="A private cinematic love story for Arpita Baby." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="ember-field" aria-hidden="true"></canvas>
+  <div id="glow" aria-hidden="true"></div>
+
+  <a class="skip-link" href="#begin-btn">Skip to the story</a>
+
+  <section id="scene-dark" class="scene scene--active" aria-label="Opening">
+    <div class="dark-veil"></div>
+
+    <svg class="hidden-mark" viewBox="0 0 600 600" aria-hidden="true">
+      <path id="mark-path" d="M300,120 C230,120 180,175 180,235 C180,300 230,330 300,395 C370,330 420,300 420,235 C420,175 370,120 300,120 Z M300,395 L300,480" />
+    </svg>
+
+    <div class="reveal-copy">
+      <p class="pre-line" data-reveal>somewhere in the quiet...</p>
+      <h1 class="name-reveal" data-reveal>
+        <span>Arpita</span>
+        <span>Baby</span>
+      </h1>
+      <p class="mystery-line" data-reveal>I made something for us, and I hope it feels like a secret worth keeping.</p>
+
+      <button id="begin-btn" class="ritual-btn" type="button">
+        <span class="ritual-btn__label">Begin</span>
+      </button>
+    </div>
+
+    <p class="hint-text" id="move-hint">move your cursor</p>
+    
+    <div id="photo-upload-helper" style="position: fixed; bottom: 20px; left: 20px; z-index: 200; background: rgba(43, 13, 20, 0.95); border: 1px solid rgba(205, 164, 94, 0.4); padding: 16px; border-radius: 8px; max-width: 280px; backdrop-filter: blur(8px);">
+      <p style="margin: 0 0 10px; font-family: var(--font-display); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-dim);">Add your photo</p>
+      <input id="photo-input" type="file" accept="image/*" style="width: 100%; padding: 8px; background: rgba(245, 239, 232, 0.05); border: 1px solid rgba(245, 239, 232, 0.14); border-radius: 4px; color: var(--cream); cursor: pointer; font-size: 11px;" />
+      <p id="upload-status" style="margin: 8px 0 0; font-size: 11px; color: var(--cream-faint);"></p>
+    </div>
+  </section>
+
+  <div id="transition-layer" aria-hidden="true"></div>
+
+  <section id="scene-story" class="scene" aria-label="Our story">
+    <div class="story-shell">
+      <p class="section-tag">our story</p>
+
+      <div class="story-intro">
+        <p class="story-kicker">Some moments are small...</p>
+        <h2>...but somehow become the ones we keep in the quietest part of us.</h2>
+      </div>
+
+      <div class="photo-glimpse">
+        <div class="photo-card" data-photo-card>
+          <div class="photo-frame photo-frame--glimpse">
+            <img src="assets/images/our-photo.jpg" alt="Arpita Baby and me" />
+          </div>
+          <p class="photo-caption" data-photo-caption>This is us — the part I keep coming back to.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="scene-journey" class="scene" aria-label="A few questions">
+    <header class="journey-head">
+      <p class="journey-eyebrow">a few things, before we go on</p>
+      <div class="progress-track" role="progressbar" aria-valuemin="1" aria-valuemax="8" aria-valuenow="1" aria-label="Question progress">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <p class="progress-count"><span id="q-current">01</span> / <span id="q-total">08</span></p>
+    </header>
+
+    <div class="question-stage" id="question-stage"></div>
+    <p class="journey-whisper" id="journey-whisper" aria-live="polite"></p>
+  </section>
+
+  <section id="scene-memory" class="scene" aria-label="Memory unlocked">
+    <div class="memory-shell">
+      <p class="section-tag">memory unlocked</p>
+      <h2 class="section-title">Little things I still remember.</h2>
+      <div id="memory-grid" class="memory-grid"></div>
+    </div>
+  </section>
+
+  <section id="scene-someday" class="scene" aria-label="Someday">
+    <div class="someday-shell">
+      <p class="section-tag">someday</p>
+      <h2 class="section-title">Things we haven't done yet, but I can picture so clearly.</h2>
+      <div id="future-grid" class="future-grid"></div>
+    </div>
+  </section>
+
+  <section id="scene-hush" class="scene" aria-label="A pause">
+    <div class="hush-shell">
+      <p class="hush-line">stay with this for a moment.</p>
+    </div>
+  </section>
+
+  <section id="scene-final" class="scene" aria-label="Final reveal">
+    <div class="final-frame">
+      <p class="final-eyebrow" data-reveal>for Arpita Baby —</p>
+
+      <div class="final-question-panel" id="final-question-panel">
+        <p class="section-tag">one last question</p>
+        <h3>If I could keep one feeling from us forever, what would it be?</h3>
+        <div class="final-options" id="final-options" aria-label="Final question options"></div>
+      </div>
+
+      <div class="final-message hidden" id="final-message">
+        <p data-reveal>Some people fill a room. You quietly rearrange the whole world around you, and somehow no one notices until they realize nothing feels the same without you in it.</p>
+        <p data-reveal>I don't know exactly what our future holds — but I know I want every slow morning, every quiet drive, and every dream we still haven't spoken out loud to be part of it.</p>
+        <p data-reveal>This was never really about eight questions. It was just an excuse to spend a little more time thinking about you, and to make a place where all of that could live.</p>
+      </div>
+
+      <button id="more-btn" class="ritual-btn ritual-btn--ghost hidden" type="button">
+        <span class="ritual-btn__label">One last secret</span>
+      </button>
+    </div>
+
+    <div class="surprise" id="surprise" hidden>
+      <div class="constellation" id="constellation" aria-hidden="true"></div>
+      <p class="surprise-line">Made for Arpita Baby, on purpose, with all the quiet details.</p>
+      <p class="surprise-date" id="today-date"></p>
+
+      <div class="final-photo-wrap">
+        <div class="photo-frame photo-frame--final">
+          <img src="assets/images/our-photo.jpg" alt="A memory of Arpita Baby and me" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="photo-modal" id="photo-modal" aria-hidden="true">
+    <button class="photo-modal__close" id="photo-modal-close" type="button" aria-label="Close photo">Close</button>
+    <div class="photo-modal__frame">
+      <img src="assets/images/our-photo.jpg" alt="Arpita Baby and me" />
+    </div>
+  </div>
+
+  <button id="sound-toggle" class="sound-toggle" type="button" aria-pressed="false" aria-label="Toggle ambient sound">
+    <span class="sound-toggle__icon" aria-hidden="true"></span>
+  </button>
+
+  <audio id="ambient-audio" src="assets/audio/ambient.mp3" loop preload="none"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
