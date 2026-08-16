@@ -1,0 +1,19 @@
+/* Arpita photo experience upgrade — loaded after style.css */
+.photo-glimpse{perspective:1400px;transform-style:preserve-3d}
+.photo-card{isolation:isolate;overflow:hidden;will-change:transform}
+.photo-card::before{content:"";position:absolute;inset:-35%;z-index:2;pointer-events:none;background:linear-gradient(115deg,transparent 38%,rgba(255,244,214,.22) 48%,rgba(205,164,94,.08) 52%,transparent 62%);transform:translateX(-70%) rotate(8deg);transition:transform 1.2s cubic-bezier(.16,.9,.24,1)}
+.photo-card:hover::before,.photo-card:focus-visible::before{transform:translateX(70%) rotate(8deg)}
+.photo-frame--glimpse{aspect-ratio:4/5;min-height:clamp(360px,52vw,620px);border-color:rgba(240,211,154,.3);box-shadow:inset 0 0 0 1px rgba(255,255,255,.025),0 0 55px rgba(205,164,94,.06)}
+.photo-frame--glimpse img{object-position:center center;image-rendering:auto}
+.photo-card:hover .photo-frame--glimpse{box-shadow:inset 0 0 0 1px rgba(240,211,154,.08),0 0 75px rgba(205,164,94,.1)}
+.photo-caption{position:relative;z-index:3}
+.photo-modal{backdrop-filter:blur(18px) saturate(.9);background:rgba(4,2,6,.88)}
+.photo-modal__frame{position:relative;width:min(92vw,820px);max-height:92svh;padding:12px;background:linear-gradient(145deg,rgba(240,211,154,.18),rgba(245,239,232,.05) 35%,rgba(7,5,10,.92));box-shadow:0 40px 120px rgba(0,0,0,.7),0 0 90px rgba(205,164,94,.08)}
+.photo-modal__frame img{max-height:84svh;object-fit:contain;background:#050308}
+.photo-modal__close{z-index:3}
+.final-photo-wrap{max-width:620px}
+.photo-frame--final{aspect-ratio:4/5;overflow:hidden}
+.photo-frame--final img{object-position:center center;transition:transform 1.4s cubic-bezier(.16,.9,.24,1),filter 1.2s ease}
+.photo-frame--final:hover img{transform:scale(1.025);filter:saturate(1.02) contrast(1.02)}
+@media(max-width:640px){.photo-card{width:min(100%,430px);padding:.7rem}.photo-frame--glimpse{min-height:0;aspect-ratio:4/5}.photo-index{top:1rem;left:1.1rem}.photo-open{right:1.1rem;bottom:1rem}.photo-caption{font-size:.98rem;padding-bottom:.7rem}.photo-modal__frame{width:94vw;padding:7px}.photo-modal__frame img{max-height:82svh}.photo-modal__close{top:14px;right:14px}.final-photo-wrap{width:100%}}
+@media(prefers-reduced-motion:reduce){.photo-card::before{display:none}.photo-frame--final img{transition:none}}
